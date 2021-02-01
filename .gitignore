@@ -54,3 +54,4 @@ lib-cov
 
 # other files
 .directory
+*.sqlite

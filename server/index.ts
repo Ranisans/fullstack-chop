@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import next from "next";
+import getConnection, { User } from "./db";
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -17,6 +18,9 @@ const port = process.env.PORT || 3000;
       if (err) throw err;
       console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`);
     });
+    const connection = await getConnection();
+    const user = await connection.getRepository(User).find();
+    console.log(user);
   } catch (e) {
     console.error(e);
     process.exit(1);
